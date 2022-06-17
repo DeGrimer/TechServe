@@ -1,0 +1,34 @@
+﻿@page
+@model TechServe.Pages.Equips.IndexModel
+@{
+}
+
+<br />
+<h2>Список оборудования</h2>
+<a class='btn btn-primary btn-sm' href='/Equips/Create'>Новое оборудование</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Производитель</th>
+            <th>Модель</th>
+            <th>Гарантия (мес.)</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.listEquip)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.producer</td>
+                <td>@item.model</td>
+                <td>@item.guarantee_period_month</td>
+                <td>
+                    <a class='btn btn-primary btn-sm' href='/Equips/Edit?id=@item.id'>Изменить</a>
+                    <a class='btn btn-danger btn-sm' href='/Equips/Delete?id=@item.id'>Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

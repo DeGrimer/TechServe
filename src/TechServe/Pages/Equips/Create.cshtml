@@ -1,0 +1,54 @@
+﻿@page
+@model TechServe.Pages.Equips.CreateModel
+@{
+}
+
+<br />
+<h2>Новое оборудование</h2>
+@if(@Model.errorMessage.Length > 0)
+{
+    <div class='alert alert-warning alert-dismissible fade show' role='alert'>
+        <strong>@Model.errorMessage</strong>
+        <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Закрыть'></button>
+    </div>
+}
+<form method="POST">
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Производитель</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="producer" value="@Model.equipInfo.producer" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Модель</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="model" value="@Model.equipInfo.model" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Гарантийный период (мес.)</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="guarantee_period_month" value="@Model.equipInfo.guarantee_period_month" />
+        </div>
+    </div>
+
+    @if(@Model.successMessage.Length > 0)
+{
+    <div class="row mb-3">
+        <div class="col-sm-9">
+            <div class='alert alert-success alert-dismissible fade show' role='alert'>
+                <strong>@Model.successMessage</strong>
+                <button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Закрыть'></button>
+            </div>
+        </div>
+    </div>
+}
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 d-grid">
+            <button type="submit" class="btn-primary btn-primary">Добавить</button>
+        </div>
+        <div class="col-sm-3 d-grid">
+            <a class="btn btn-outline-primary" href="/" role="button">Отмена</a>
+        </div>
+    </div>
+</form>

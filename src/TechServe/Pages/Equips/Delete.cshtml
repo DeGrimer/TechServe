@@ -1,0 +1,28 @@
+﻿@page
+@using System.Data.SqlClient;
+@using TechServe.SqlExt
+@{
+    try
+    {
+        string id = Request.Query["id"];
+
+        string connectionString = Connection.ConnectionString;
+
+        using (var connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+
+            string sql = "DELETE FROM equip WHERE id=@id";
+            using (var command = new SqlCommand(sql, connection))
+            {
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+            }
+        }
+    }
+    catch(Exception ex)
+    {
+
+    }
+    Response.Redirect("/Equips/Index");
+}

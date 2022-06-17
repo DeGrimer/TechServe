@@ -1,0 +1,52 @@
+﻿@page
+@model TechServe.Pages.Equips_sell.IndexModel
+@{
+}
+
+<br />
+<h2>Список продаж</h2>
+<a class='btn btn-primary btn-sm' href='/Equips_sell/Create'>Новая продажа</a>
+<form>
+    <div>
+        <label class="col-sm-3 col-form-label">Имя клиента</label>
+        <div class="col-sm-3">
+            <input type = "text" name = "name" value = "@Model.SearchString" />
+        </div>
+         <div class="col-sm-4" style="padding:10px">
+            <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
+            </div>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>
+                <a asp-page="Index" asp-route-sortOrder="@Model.NameSort">
+                Имя покупателя
+                </a>
+            </th>
+            <th>Производитель</th>
+            <th>Модель</th>
+            <th>Дата продажи</th>
+            <th>На гарантии</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.SellsInfo)
+        {
+            <tr>
+                <td>@item.id</td>
+                <td>@item.name</td>
+                <td>@item.producer</td>
+                <td>@item.model</td>
+                <td>@item.sell_date</td>
+                <td>@item.guarantee_name</td>
+                <td>
+                    <a class='btn btn-primary btn-sm' href='/Equips/Edit?id=@item.id'>Изменить</a>
+                    <a class='btn btn-danger btn-sm' href='/Equips/Delete?id=@item.id'>Удалить</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
