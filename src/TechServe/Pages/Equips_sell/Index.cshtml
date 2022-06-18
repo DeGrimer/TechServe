@@ -9,10 +9,10 @@
 <form>
     <div>
         <label class="col-sm-3 col-form-label">Имя клиента</label>
-        <div class="col-sm-3">
+        <div>
             <input type = "text" name = "name" value = "@Model.SearchString" />
         </div>
-         <div class="col-sm-4" style="padding:10px">
+         <div class="col-sm-3" style="padding:10px">
             <button type="submit" class="btn btn-primary btn-sm">Поиск</button>
             </div>
     </div>
@@ -22,13 +22,17 @@
         <tr>
             <th>ID</th>
             <th>
-                <a asp-page="Index" asp-route-sortOrder="@Model.NameSort">
+                <a asp-page="Index" asp-route-nameSortOrder="@Model.NameSort">
                 Имя покупателя
                 </a>
             </th>
             <th>Производитель</th>
             <th>Модель</th>
-            <th>Дата продажи</th>
+            <th>
+                <a asp-page="Index" asp-route-dateSortOrder="@Model.DateSort">
+                Дата продажи
+                </a>
+            </th>
             <th>На гарантии</th>
         </tr>
     </thead>

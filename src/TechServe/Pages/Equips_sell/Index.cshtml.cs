@@ -10,13 +10,25 @@ namespace TechServe.Pages.Equips_sell
     [Authorize]
     public class IndexModel : PageModel
     {
-        public string NameSort { get; set; }
+        public string NameSort { get; set; } = "name_asc";
+        public string DateSort { get; set; } = "date_asc";
         public string SearchString { get; set; }
+
         public List<EquipSellInfo> SellsInfo = new List<EquipSellInfo>();
-        public bool Guarantee { get; set; }
-        public void OnGet(string sortOrder)
+        public void OnGet(string nameSortOrder, string dateSortOrder)
         {
-            NameSort = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            var sort = "";
+            if (!string.IsNullOrEmpty(nameSortOrder))
+            {
+                NameSort = nameSortOrder == "name_desc" ? "name_asc" : "name_desc";
+                sort += NameSort;
+            }
+
+            if (!string.IsNullOrEmpty(dateSortOrder))
+            {
+                DateSort = dateSortOrder == "date_desc" ? "date_asc" : "date_desc";
+                sort += DateSort;
+            }
             SearchString = Request.Query["name"];
             string connectionString = Connection.ConnectionString;
             try
@@ -31,10 +43,13 @@ namespace TechServe.Pages.Equips_sell
                     {
                         sql += @"WHERE name="+"\'"+SearchString+"\'";
                     }
-                    sql += sortOrder switch
+                    sql += sort switch
                     {
-                        "name_desc" => @"ORDER BY name",
-                        _ => @"ORDER BY name DESC",
+                        "name_desc" => @"ORDER BY name DESC",
+                        "name_asc" => @"ORDER BY name",
+                        "date_desc" => @"ORDER BY sell_date DESC",
+                        "date_asc" => @"ORDER BY sell_date",
+                        _ => ""
                     };
                     using (SqlCommand cmd = new SqlCommand(sql, connection))
                     {
